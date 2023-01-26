@@ -56,16 +56,16 @@ def checkDecreasing(function, x):
 
     return decreasing
 
-def minTerm(function, x, error):
+def minTerm(function, error):
     k = 1
     while abs(eval(function)) > error:
         k+=1
-    print(k)
+    print(k-1)
     print()
 
 def bisection(function, accuracy, l, r):
     i = 0
-    while abs(r - l) >= accuracy and i <= 1000:
+    while abs(r - l) > accuracy and i <= 1000:
         i += 1
 
         m = (r + l) / 2
@@ -90,12 +90,13 @@ def newtonRaphson(function, functionDir, x, accuracy):
     i = 0
     while(i < 1000):
         if eval(functionDir) != 0:
+            i += 1
             xNext = x - eval(function) / eval(functionDir)
             if(abs(xNext - x) < accuracy):
                 print(i)
                 return
             x = xNext
-            i += 1
+    
 
 if __name__ == "__main__":
     # Questions 1 - 4
@@ -104,13 +105,13 @@ if __name__ == "__main__":
 
     # Question 5
     x = 1
-    function = "(-1**k) * ((x**k) / (k**3))"
+    function = "(-1**k) * ((1**k) / (k**3))"
 
     checkAleternating = checkAleternating(function)
     checkDecreasing = checkDecreasing(function, x)
 
     if checkAleternating and checkDecreasing:
-        minTerm(function, 1, 1e-4)
+        minTerm(function, 1e-4)
 
     # Question 6
     left = -4
